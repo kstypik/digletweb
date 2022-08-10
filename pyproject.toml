@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "digletweb"
+version = "0.1.0"
+description = "Content aggregator and microblogging similar to Digg/Wykop"
+authors = ["Kacper Stypik <kacperstypik@mailbox.org>"]
+license = "GNU GPL v3"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
