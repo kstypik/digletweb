@@ -25,6 +25,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+SITE_ID = 1
+
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
@@ -57,10 +59,16 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "dj_rest_auth",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
 ]
 
 LOCAL_APPS = [
@@ -190,3 +198,20 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
+
+# DJANGO REST FRAMEWORK
+# ------------------------------------------------------------------------------
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ("dj_rest_auth.jwt_auth.JWTCookieAuthentication",)
+}
+
+# dj-rest-auth
+# ------------------------------------------------------------------------------
+# https://dj-rest-auth.readthedocs.io/en/latest/index.html
+REST_USE_JWT = True
+REST_AUTH_TOKEN_MODEL = None
+
+JWT_AUTH_COOKIE = "digletweb-auth"
+JWT_AUTH_REFRESH_COOKIE = "digletweb-refresh-token"
