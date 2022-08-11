@@ -1,5 +1,6 @@
-from digletweb.links.models import Link
 from rest_framework import serializers
+
+from digletweb.links.models import Link
 
 
 class LinkSerializer(serializers.ModelSerializer):

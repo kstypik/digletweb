@@ -1,6 +1,8 @@
-from digletweb.links.views import LinkViewSet
 from django.conf import settings
+
 from rest_framework.routers import DefaultRouter, SimpleRouter
+
+from digletweb.links.views import LinkViewSet
 
 if settings.DEBUG:
     router = DefaultRouter()

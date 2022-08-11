@@ -1,5 +1,6 @@
-from digletweb.links.models import Link
 from django.contrib import admin
+
+from digletweb.links.models import Link
 
 
 @admin.register(Link)

@@ -1,7 +1,8 @@
+from rest_framework import viewsets
+
 from digletweb.core.permissions import IsAuthorOrReadOnly
 from digletweb.links.models import Link
 from digletweb.links.serializers import LinkSerializer
-from rest_framework import viewsets
 
 
 class LinkViewSet(viewsets.ModelViewSet):

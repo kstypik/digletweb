@@ -1,7 +1,9 @@
-from autoslug import AutoSlugField
-from digletweb.users.models import User
 from django.db import models
+
+from autoslug import AutoSlugField
 from model_utils.models import TimeStampedModel
+
+from digletweb.users.models import User
 
 
 def thumbnail_path(instance, filename):
