@@ -6,6 +6,7 @@ from django.urls import include, path
 api_urlpatterns = [
     path("auth/", include("dj_rest_auth.urls")),
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
+    path("users/", include("digletweb.users.urls")),
     path("", include("config.api_router")),
 ]
 
