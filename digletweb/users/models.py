@@ -8,7 +8,7 @@ from digletweb.users.validators import background_image_restriction
 
 
 def user_directory_path(instance, filename):
-    return f"{instance.username}_{filename}"
+    return f"avatars/{instance.username}_{filename}"
 
 
 def profile_background_directory_path(instance, filename):
