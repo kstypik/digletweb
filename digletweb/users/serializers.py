@@ -1,9 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from digletweb.users.models import User
 
 
-class UserAvatarSerializer(ModelSerializer):
+class UserAvatarSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["avatar"]
@@ -14,7 +14,7 @@ class UserAvatarSerializer(ModelSerializer):
         return super().save(*args, **kwargs)
 
 
-class UserBackgroundSerializer(ModelSerializer):
+class UserBackgroundSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["background_image"]
@@ -23,3 +23,20 @@ class UserBackgroundSerializer(ModelSerializer):
         if self.instance.background_image:
             self.instance.background_image.delete()
         return super().save(*args, **kwargs)
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "full_name",
+            "gender",
+            "location",
+            "website",
+            "facebook_profile",
+            "twitter_profile",
+            "instagram_profile",
+            "about",
+            "avatar",
+            "background_image",
+        ]

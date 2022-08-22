@@ -16,6 +16,11 @@ def profile_background_directory_path(instance, filename):
 
 
 class User(AbstractUser):
+    class Gender(models.TextChoices):
+        UNSPECIFIED = "U", "Unspecified"
+        FEMALE = "F", "Female"
+        MALE = "M", "Male"
+
     avatar = ProcessedImageField(
         upload_to=user_directory_path,
         blank=True,
@@ -36,3 +41,14 @@ class User(AbstractUser):
         upload_to=profile_background_directory_path,
         blank=True,
     )
+
+    full_name = models.CharField(max_length=200, blank=True)
+    gender = models.CharField(
+        max_length=1, choices=Gender.choices, default=Gender.UNSPECIFIED
+    )
+    location = models.CharField(max_length=200, blank=True)
+    website = models.URLField(blank=True)
+    facebook_profile = models.URLField(blank=True)
+    twitter_profile = models.URLField(blank=True)
+    instagram_profile = models.URLField(blank=True)
+    about = models.TextField(blank=True)
