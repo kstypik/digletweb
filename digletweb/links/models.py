@@ -25,3 +25,12 @@ class Link(VoteModel, TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+class RelatedLink(VoteModel, TimeStampedModel):
+    url = models.URLField()
+    parent = models.ForeignKey(Link, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    thumbnail = models.ImageField(upload_to="related_links_thumbnails", blank=True)
+    domain = models.URLField(blank=True)
