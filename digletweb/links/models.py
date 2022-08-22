@@ -2,6 +2,7 @@ from django.db import models
 
 from autoslug import AutoSlugField
 from model_utils.models import TimeStampedModel
+from vote.models import VoteModel
 
 from digletweb.users.models import User
 
@@ -14,7 +15,7 @@ def thumbnail_path(instance, filename):
     return f"{instance.slug}.{file_ext}"
 
 
-class Link(TimeStampedModel):
+class Link(VoteModel, TimeStampedModel):
     title = models.CharField(max_length=150)
     slug = AutoSlugField(populate_from="title", unique=True)
     domain = models.URLField()

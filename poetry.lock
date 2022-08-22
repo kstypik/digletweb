@@ -252,6 +252,14 @@ python-versions = "*"
 Django = ">=2.0.1"
 
 [[package]]
+name = "django-vote"
+version = "2.3.0"
+description = "A simple Django app to conduct vote."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "djangorestframework"
 version = "3.13.1"
 description = "Web APIs for Django, made easy."
@@ -522,7 +530,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b2dcf8a8eaa1e32f12b4441329dcff74ea60c85cc220758dd29306e93e88b6b9"
+content-hash = "6262da048ce8a134e3eccb17019ff86818e3f18fc9c67d10ca465088f9d89ef8"
 
 [metadata.files]
 argon2-cffi = [
@@ -605,6 +613,10 @@ django-imagekit = [
 django-model-utils = [
     {file = "django-model-utils-4.2.0.tar.gz", hash = "sha256:e7a95e102f9c9653427eadab980d5d59e1dea972913b9c9e01ac37f86bba0ddf"},
     {file = "django_model_utils-4.2.0-py3-none-any.whl", hash = "sha256:a768a25c80514e0ad4e4a6f9c02c44498985f36c5dfdea47b5b1e8cf994beba6"},
+]
+django-vote = [
+    {file = "django-vote-2.3.0.tar.gz", hash = "sha256:1c8dfbea5d09ff4161a0500435ef010e2ce81638c21c5e9488d33db48dd16f6e"},
+    {file = "django_vote-2.3.0-py3-none-any.whl", hash = "sha256:c0b0e830290f57928cb1340dbb51823a260b6a72317964b3282e0b84d81a945b"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.13.1-py3-none-any.whl", hash = "sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa"},

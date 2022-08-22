@@ -70,6 +70,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "dj_rest_auth.registration",
     "imagekit",
+    "vote",
 ]
 
 LOCAL_APPS = [
