@@ -10,4 +10,9 @@ urlpatterns = [
         views.RelatedLinkListCreate.as_view(),
         name="related_link_list_create",
     ),
+    path(
+        "<int:parent_id>/related/<int:related_id>/",
+        views.RelatedLinkRetrieveUpdateDestroy.as_view(),
+        name="related_link_retrieve_update_destroy",
+    ),
 ]

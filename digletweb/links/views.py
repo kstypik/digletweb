@@ -30,3 +30,14 @@ class RelatedLinkListCreate(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         parent_link = get_object_or_404(Link, id=self.kwargs["id"])
         serializer.save(parent=parent_link, author=self.request.user)
+
+
+class RelatedLinkRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = RelatedLinkSerializer
+    queryset = RelatedLink.objects.all()
+    permission_classes = [IsAuthorOrReadOnly]
+    lookup_url_kwarg = "related_id"
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return RelatedLink.objects.filter(parent=self.kwargs["parent_id"])
