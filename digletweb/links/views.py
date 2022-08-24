@@ -24,6 +24,13 @@ class LinkViewSet(viewsets.ModelViewSet, VoteMixin):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+    def get_queryset(self):
+        domain = self.request.query_params.get("domain")
+        if self.action == "list" and domain:
+            return Link.objects.filter(domain=domain)
+        else:
+            return super().get_queryset()
+
 
 class RelatedLinkListCreate(generics.ListCreateAPIView):
     serializer_class = RelatedLinkSerializer
