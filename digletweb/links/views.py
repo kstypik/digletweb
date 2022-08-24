@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 
 from vote.views import VoteMixin
 
@@ -11,6 +12,7 @@ from digletweb.links.serializers import (
     CommentSerializer,
     LinkSerializer,
     RelatedLinkSerializer,
+    ReplySerializer,
 )
 
 
@@ -69,3 +71,33 @@ class CommentRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Comment.objects.filter(link=self.kwargs["link_id"])
+
+
+class ReplyListCreate(generics.ListCreateAPIView):
+    serializer_class = ReplySerializer
+    queryset = Comment.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        return Comment.objects.filter(
+            parent=self.kwargs["parent_id"], link=self.kwargs["link_id"]
+        )
+
+    def perform_create(self, serializer):
+        parent_comment = get_object_or_404(Comment, id=self.kwargs["parent_id"])
+        serializer.save(
+            parent=parent_comment, author=self.request.user, link=parent_comment.link
+        )
+
+
+class ReplyRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ReplySerializer
+    queryset = Comment.objects.all()
+    permission_classes = [IsAuthorOrReadOnly]
+    lookup_url_kwarg = "reply_id"
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return Comment.objects.filter(
+            link=self.kwargs["link_id"], parent=self.kwargs["comment_id"]
+        )

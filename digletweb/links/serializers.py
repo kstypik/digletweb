@@ -31,3 +31,10 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ["id", "link", "author", "message", "created"]
         read_only_fields = ["author", "link"]
+
+
+class ReplySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ["id", "parent", "author", "message", "created"]
+        read_only_fields = ["author", "parent"]
