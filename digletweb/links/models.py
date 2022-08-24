@@ -34,3 +34,12 @@ class RelatedLink(VoteModel, TimeStampedModel):
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     thumbnail = models.ImageField(upload_to="related_links_thumbnails", blank=True)
     domain = models.URLField(blank=True)
+
+
+class Comment(TimeStampedModel):
+    link = models.ForeignKey(Link, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    message = models.TextField()
+    parent = models.ForeignKey(
+        "self", on_delete=models.CASCADE, null=True, related_name="replies"
+    )

@@ -15,4 +15,14 @@ urlpatterns = [
         views.RelatedLinkRetrieveUpdateDestroy.as_view(),
         name="related_link_retrieve_update_destroy",
     ),
+    path(
+        "<int:link_id>/comments/",
+        views.CommentListCreate.as_view(),
+        name="comment_list_create",
+    ),
+    path(
+        "<int:link_id>/comments/<int:comment_id>/",
+        views.CommentRetrieveUpdateDestroy.as_view(),
+        name="comment_retrieve_update_destroy",
+    ),
 ]

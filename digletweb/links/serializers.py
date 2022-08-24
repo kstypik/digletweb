@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from digletweb.links.models import Link, RelatedLink
+from digletweb.links.models import Comment, Link, RelatedLink
 
 
 class LinkSerializer(serializers.ModelSerializer):
@@ -24,3 +24,10 @@ class RelatedLinkSerializer(serializers.ModelSerializer):
             "domain",
         ]
         read_only_fields = ["author", "parent"]
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ["id", "link", "author", "message", "created"]
+        read_only_fields = ["author", "link"]
