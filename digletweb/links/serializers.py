@@ -13,5 +13,14 @@ class LinkSerializer(serializers.ModelSerializer):
 class RelatedLinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = RelatedLink
-        fields = ["url", "parent", "title", "author", "created", "thumbnail", "domain"]
+        fields = [
+            "id",
+            "url",
+            "parent",
+            "title",
+            "author",
+            "created",
+            "thumbnail",
+            "domain",
+        ]
         read_only_fields = ["author", "parent"]
