@@ -6,7 +6,16 @@ from digletweb.links.models import Comment, Link, RelatedLink
 class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
-        fields = ["id", "title", "slug", "domain", "description", "thumbnail", "author"]
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "domain",
+            "description",
+            "thumbnail",
+            "author",
+            "vote_score",
+        ]
         read_only_fields = ["author"]
 
 
