@@ -1,6 +1,10 @@
+from datetime import timedelta
+
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 from rest_framework import generics, viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
@@ -30,6 +34,31 @@ class LinkViewSet(viewsets.ModelViewSet, VoteMixin):
             return Link.objects.filter(domain=domain)
         else:
             return super().get_queryset()
+
+    @action(detail=False)
+    def hits(self, request):
+        time_range_param = request.query_params.get("from")
+        time_ranges_map = {
+            "day": timedelta(days=1),
+            "week": timedelta(days=7),
+            "month": timedelta(days=30),
+            "year": timedelta(days=365),
+        }
+        if time_range_param:
+            try:
+                time_range = timezone.now() + time_ranges_map[time_range_param]
+            except KeyError:
+                time_range = time_ranges_map["week"]
+        links = Link.objects.all().order_by("-vote_score")
+        if time_range:
+            links = links.filter(created__lte=time_range)
+        page = self.paginate_queryset(links)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(links, many=True)
+        return Response(serializer.data)
 
 
 class RelatedLinkListCreate(generics.ListCreateAPIView):
